@@ -10,6 +10,10 @@ ctx.verify_mode=ssl.CERT_NONE
 
 ## TODO: add main
 
+a = some
+new
+staff
+
 url = "https://api.jde.ru/vD/calculator/price?from=1125899906842658&to=1125899906842673&weight=25&width=1&volume=0,02&type=1"
 
 print('Retrieving', url, sep=' ----->>>  ')
