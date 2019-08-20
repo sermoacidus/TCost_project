@@ -5,10 +5,7 @@ import pandas as pd
 def count_the_cost():
     if var_for_gp1 == False:
         info_result.configure(text=int(message_from_box_amount1))
-        print(group_combobox1)
-
-def foo(event):
-    print(group_combobox1_value.get())
+        print(group_combobox.textincombobox.get())
 
 class LabelP(tk.Label):
     def __init__(self,row_inp,column_inp, *args, **kwargs):
@@ -16,11 +13,18 @@ class LabelP(tk.Label):
         self.grid(row=row_inp,column=column_inp)
 
 class ComboboxP(ttk.Combobox):
+
     def __init__(self, row_inp, column_inp, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.grid(row=row_inp, column=column_inp)
         self.set('введи группу')
-        self.user_choise = tk.StringVar()
+        self.textincombobox = tk.StringVar()
+        self['textvariable'] = self.textincombobox
+    #def listen_to_text(self,textvariable):
+     #   self.textvariable = textvariable
+      #  self.textvariable = tk.StringVar()
+    #def read_the_combobox_value(self, event):
+     #   print(self.group_combobox_value)
 
 root = tk.Tk()
 #root.geometry
@@ -31,15 +35,11 @@ for i in range(0, len(df.values)):
     gp_label = LabelP(i+1, 1, root, text=df.values[i][0])
 
 #Выбор группы грузополучателей по укрупнению (до 13 групп)
-#group_combobox_test = ComboboxP(3, 2, root, textvariable=group_combobox_test.user_choise, values=[n for n in range(1,14)], height=13)
-group_combobox1_value = tk.StringVar()
-group_combobox1 = ttk.Combobox(root, textvariable=group_combobox1_value, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], height=13)
-group_combobox1.set('введи группу')
-group_combobox1.grid(row=1, column=2)
-group_combobox1.bind('<<ComboboxSelected>>',foo)
-group_combobox2 = ttk.Combobox(root, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], height=13)
-group_combobox2.set('введи группу')
-group_combobox2.grid(row=2, column=2)
+#group_combobox_test.listen_to_text(group_combobox_test_value)
+for i in range(0, len(df.values)):
+    group_combobox = ComboboxP(i+1, 2, root, values=[n for n in range(1,14)], height=13)
+#group_combobox_test['textvariable'] = group_combobox_test.textincombobox
+
 
 var_for_gp1 = False
 gp_main1 = tk.Checkbutton(root, text='Грузополучатель?', variable=var_for_gp1, onvalue=True, offvalue=False)
