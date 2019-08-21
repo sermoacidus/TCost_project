@@ -5,7 +5,8 @@ import pandas as pd
 def count_the_cost():
     if var_for_gp1 == False:
         info_result.configure(text=int(message_from_box_amount1))
-        print(group_combobox.textincombobox.get())
+        print(comboboxp.textincombobox.get())
+        print(comboboxp2.textincombobox.get())
 
 class LabelP(tk.Label):
     def __init__(self,row_inp,column_inp, *args, **kwargs):
@@ -13,31 +14,43 @@ class LabelP(tk.Label):
         self.grid(row=row_inp,column=column_inp)
 
 class ComboboxP(ttk.Combobox):
-
     def __init__(self, row_inp, column_inp, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.grid(row=row_inp, column=column_inp)
         self.set('введи группу')
         self.textincombobox = tk.StringVar()
         self['textvariable'] = self.textincombobox
+        self['values'] = [n for n in range(1,14)]
+        self['height'] = 13
+        self['width'] = 5
     #def listen_to_text(self,textvariable):
      #   self.textvariable = textvariable
       #  self.textvariable = tk.StringVar()
     #def read_the_combobox_value(self, event):
      #   print(self.group_combobox_value)
+#def initialize_all_comboboxes():
+    #for i in range(0, len(df.values)):
+
 
 root = tk.Tk()
 #root.geometry
 
-#Перечень грузополучателей (1ый столбец)
 df = pd.read_excel('data_set_for_TCost.xlsx')
+
+#Перечень грузополучателей (1ый столбец)
 for i in range(0, len(df.values)):
     gp_label = LabelP(i+1, 1, root, text=df.values[i][0])
 
 #Выбор группы грузополучателей по укрупнению (до 13 групп)
 #group_combobox_test.listen_to_text(group_combobox_test_value)
+a = []
 for i in range(0, len(df.values)):
-    group_combobox = ComboboxP(i+1, 2, root, values=[n for n in range(1,14)], height=13)
+    a.append('group_combobox'+str(i))
+    a[i] = ComboboxP(i+1, 2, root)
+print(a[0],type(a[0]),a[1],type(a[1]),a[2],type(a[2]))
+#print(a)
+#for i in range(0, len(df.values)):
+#    group_combobox = ComboboxP(i+1, 2, root)
 #group_combobox_test['textvariable'] = group_combobox_test.textincombobox
 
 
