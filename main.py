@@ -1,10 +1,19 @@
 import urllib.request, urllib.parse, urllib.error
 import json
 import ssl
+from tcost_gui import *
 
 ctx=ssl.create_default_context()
 ctx.check_hostname=False
 ctx.verify_mode=ssl.CERT_NONE
+
+
+def main_code():
+    return None
+
+
+print(gp[2])
+
 
 
 url = '''https://api.jde.ru/vD/calculator/price?from=1125899906842658&to=112589990

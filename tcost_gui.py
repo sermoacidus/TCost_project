@@ -2,14 +2,18 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import pandas as pd
 
+
+# from main import main_code
+
 #тестовая функция
 def count_the_cost():
-    info_result.configure(text=int(b[1].digitin_entry.get()))
+    # main_code()
+    info_result.configure(text=int(b[0].digitin_entry.get()))
     print(a[3].textincombobox.get())
     print(a[4].textincombobox.get())
     print(a[5].textincombobox.get())
     print(c[1].ifconsumerornot.get())
-    print(if0.ifconsumerornot.get())
+    #print(if0.ifconsumerornot.get())
 
 class LabelP(tk.Label):
     def __init__(self,row_inp,column_inp, *args, **kwargs):
@@ -20,7 +24,7 @@ class ComboboxP(ttk.Combobox):
     def __init__(self, row_inp, column_inp, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.grid(row=row_inp, column=column_inp)
-        self.set('введи группу')
+        self.set('re')
         self.textincombobox = tk.StringVar()
         self['textvariable'] = self.textincombobox
         self['values'] = [n for n in range(1,14)]
@@ -52,8 +56,11 @@ root = tk.Tk()
 df = pd.read_excel('data_set_for_TCost.xlsx')
 
 #Перечень грузополучателей (1ый столбец)
+gp = []
 for i in range(0, len(df.values)):
-    gp_label = LabelP(i+1, 1, root, text=df.values[i][0])
+    gp.append('gp' + str(i))
+    gp[i] = LabelP(i + 1, 1, root, text=df.values[i][0])
+    #print(gp[i])
 
 #является ли грузополучателем или же потребитель по укрупнению
 c = []
