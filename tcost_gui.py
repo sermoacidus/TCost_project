@@ -3,6 +3,10 @@ import tkinter.ttk as ttk
 import pandas as pd
 
 
+
+
+
+
 # from main import main_code
 
 #тестовая функция
@@ -50,6 +54,12 @@ class CheckbuttonP(tk.Checkbutton):
         self['offvalue'] = False
 
 root = tk.Tk()
+container = tk.Canvas(root)
+s = ttk.Scrollbar(root, orient=tk.VERTICAL, command=container.yview)
+s.grid(column=1, row=0, sticky=('ns'))
+container['yscrollcommand'] = s.set
+container.configure(yscrollcommand=s.set)
+sometesttext =
 #root.geometry
 
 #подгрузка базы грузополучателей

@@ -1,7 +1,7 @@
 import urllib.request, urllib.parse, urllib.error
 import json
 import ssl
-from tcost_gui import *
+#from tcost_gui import *
 
 ctx=ssl.create_default_context()
 ctx.check_hostname=False
