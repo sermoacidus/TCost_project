@@ -9,10 +9,19 @@ import pandas as pd
 
 # from main import main_code
 
-#тестовая функция
+#создание словаря с вводными данными
 def count_the_cost():
-    # main_code()
-    info_result.configure(text=int(b[0].digitin_entry.get()))
+    main_dict = {}
+    for n in range(len(df.values)):
+        try:
+            kolvo = int(b[n].digitin_entry.get())
+        except:
+            print(df.values[n][0] + ' в разнарядке не присутствует')
+            continue
+        main_dict[df.values[n][0]]=(kolvo,)
+    print(main_dict)
+
+    #info_result.configure(text=int(b[0].digitin_entry.get()))
     print(a[3].textincombobox.get())
     print(a[4].textincombobox.get())
     print(a[5].textincombobox.get())
@@ -44,14 +53,20 @@ class EntryP(tk.Entry):
         self['width'] = 3
 
 class CheckbuttonP(tk.Checkbutton):
-    def __init__(self, row_inp, column_inp, *args, **kwargs):
+    def __init__(self, row_inp, column_inp, name, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.grid(row=row_inp, column=column_inp)
         self['text'] = 'Грузополучатель?'
         self.ifconsumerornot = tk.BooleanVar()
+        self.name = name
         self['variable'] = self.ifconsumerornot
         self['onvalue'] = True
         self['offvalue'] = False
+    def __str__(self):
+        return self.name
+    def __repr__(self):
+        return self.name
+
 
 def onFrameConfigure(container):
     container.configure(scrollregion=container.bbox("all"))
@@ -83,7 +98,7 @@ for i in range(0, len(df.values)):
 c = []
 for i in range(0, len(df.values)):
     c.append('if'+str(i))
-    c[i] = CheckbuttonP(i+1, 3, main_window)
+    c[i] = CheckbuttonP(i+1, 3, c[i], main_window)
 
 #кол-во мест
 b = []
