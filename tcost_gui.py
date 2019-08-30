@@ -2,11 +2,6 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import pandas as pd
 
-
-
-
-
-
 # from main import main_code
 
 #создание словаря с вводными данными
@@ -14,11 +9,13 @@ def count_the_cost():
     main_dict = {}
     for n in range(len(df.values)):
         try:
-            kolvo = int(b[n].digitin_entry.get())
+            group_number = int(a[n].textincombobox.get())
+            boxes_amount = int(b[n].digitin_entry.get())
+            is_receiver = c[n].ifconsumerornot.get()
         except:
             print(df.values[n][0] + ' в разнарядке не присутствует')
             continue
-        main_dict[df.values[n][0]]=(kolvo,)
+        main_dict[df.values[n][0]]=(group_number,is_receiver,boxes_amount)
     print(main_dict)
 
     #info_result.configure(text=int(b[0].digitin_entry.get()))
@@ -72,7 +69,7 @@ def onFrameConfigure(container):
     container.configure(scrollregion=container.bbox("all"))
 
 root = tk.Tk()
-root.geometry('450x400') #TODO: центрирование
+root.geometry('450x400') #TODO: центрирование, имя окна
 container = tk.Canvas(root)
 main_window = tk.Frame(container)
 scr = ttk.Scrollbar(root, orient="vertical", command=container.yview)
