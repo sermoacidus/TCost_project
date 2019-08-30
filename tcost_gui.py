@@ -2,10 +2,9 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import pandas as pd
 
-# from main import main_code
-
 #создание словаря с вводными данными
 def count_the_cost():
+    global main_dict
     main_dict = {}
     for n in range(len(df.values)):
         try:
@@ -17,13 +16,7 @@ def count_the_cost():
             continue
         main_dict[df.values[n][0]]=(group_number,is_receiver,boxes_amount)
     print(main_dict)
-
-    #info_result.configure(text=int(b[0].digitin_entry.get()))
-    print(a[3].textincombobox.get())
-    print(a[4].textincombobox.get())
-    print(a[5].textincombobox.get())
-    print(c[1].ifconsumerornot.get())
-    #print(if0.ifconsumerornot.get())
+    return main_dict
 
 class LabelP(tk.Label):
     def __init__(self,row_inp,column_inp, *args, **kwargs):

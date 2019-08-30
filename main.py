@@ -1,7 +1,7 @@
 import urllib.request, urllib.parse, urllib.error
 import json
 import ssl
-#from tcost_gui import *
+import tcost_gui
 
 ctx=ssl.create_default_context()
 ctx.check_hostname=False
@@ -11,10 +11,8 @@ ctx.verify_mode=ssl.CERT_NONE
 def main_code():
     return None
 
-
-print(gp[2])
-
-
+print('TRANSFERING SUCCESFUL',tcost_gui.main_dict)
+quit()
 
 url = '''https://api.jde.ru/vD/calculator/price?from=1125899906842658&to=112589990
 6842673&weight=25&width=1&volume=0,02&type=1'''
