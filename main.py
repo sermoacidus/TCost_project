@@ -1,33 +1,42 @@
-import urllib.request, urllib.parse, urllib.error
-import json
-import ssl
-import tcost_gui
+import requests
+import apiprep
+import config
+import pandas as pd
 
-ctx=ssl.create_default_context()
-ctx.check_hostname=False
-ctx.verify_mode=ssl.CERT_NONE
+URL = "https://api.jde.ru/vD/calculator/PriceAddress?"
 
 
-def main_code():
-    return None
+def main_code(resdict):
+    """
+    возвращает город и цену доставки полученных на выход данных
+    """
+    for deliverytarget, boxes_amount in resdict.items():
+        params = {"addr_from": "Тверь",
+                  "addr_to": deliverytarget,
+                  "type": "1",
+                  "weight": config.BOXWEIGHT,
+                  "volume": config.BOXVOLUME,
+                  "quantity": boxes_amount,
+                  "pickup": '1',
+                  "delivery": '1',
+                  "user": config.USER,
+                  "token": config.TOKEN}
+        r = requests.get(URL, params=params)
+        print(r.json()['price'], type(r.json()['price']))
+        yield int(r.json()['price'])
 
-print('TRANSFERING SUCCESFUL',tcost_gui.main_dict)
-quit()
 
-url = '''https://api.jde.ru/vD/calculator/price?from=1125899906842658&to=112589990
-6842673&weight=25&width=1&volume=0,02&type=1'''
-
-print('Retrieving', url, sep=' ----->>>  ')
-
-#requesting data
-urlop = urllib.request.urlopen(url)
-data = urlop.read().decode()
-print('Retrieved', len(data), 'characters')
-print(data,type(data))
-
-#converting data to .dict
-try:
-    js = json.loads(data)
-except:
-    js = None
-print(js,type(js))
+a = main_code(apiprep.result_of_module)
+new_column = []
+df = pd.read_excel('data_set_for_TCost.xlsx')
+for gp in range(0, len(df.values)):
+    for deltarget, boxes in apiprep.result_of_module.items():
+        i = 0
+        if deltarget == df.values[gp][2]:
+            new_column.append(int(next(a)))
+            i = 1
+            break
+    if i == 0:
+        new_column.append(None)
+df['price'] = new_column
+df.to_excel('data_set_for_TCost.xlsx', sheet_name='with_price', index=False)

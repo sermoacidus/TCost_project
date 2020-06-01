@@ -15,7 +15,7 @@ def count_the_cost():
             print(df.values[n][0] + ' в разнарядке не присутствует')
             continue
         main_dict[df.values[n][0]]=(group_number,is_receiver,boxes_amount)
-    print(main_dict)
+    root.destroy()
     return main_dict
 
 class LabelP(tk.Label):
@@ -62,7 +62,7 @@ def onFrameConfigure(container):
     container.configure(scrollregion=container.bbox("all"))
 
 root = tk.Tk()
-root.geometry('450x400') #TODO: центрирование, имя окна
+root.geometry('515x840+650+100')
 container = tk.Canvas(root)
 main_window = tk.Frame(container)
 scr = ttk.Scrollbar(root, orient="vertical", command=container.yview)
