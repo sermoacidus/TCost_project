@@ -16,7 +16,7 @@ I = Image('replogo.gif')
 I.drawHeight = 1.25 * inch * I.drawHeight / I.drawWidth
 I.drawWidth = 1.25 * inch
 P0 = Paragraph('''
-               <b>A pa<font color=red face=FreeSans>член</font>a<i>graph</i></b>
+               <b>A pa<font color=red face=FreeSans>smt</font>a<i>graph</i></b>
                <super><font color=yellow>1</font></super>''',
                styleSheet["BodyText"])
 P = Paragraph('''
